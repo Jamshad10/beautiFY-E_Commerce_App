@@ -4,11 +4,26 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from '../../redux/cartSlice';
 import { toast } from 'react-toastify';
+import { useEffect } from 'react';
+import { getProducts } from '../../redux/productSlice';
+import axios from 'axios';
 
 
 export default function Products() {
     const products = useSelector((state) => state.products.products.slice(100, 106));
     console.log(products);
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+          try {
+            const response = await axios.get('http://makeup-api.herokuapp.com/api/v1/products.json');
+            dispatch(getProducts(response.data));
+          } catch (error) {
+            console.log(error);
+          }
+        }
+        fetchProducts();
+      }, [])
 
     const dispatch = useDispatch();
     const handleAddToCart = (item) => {
