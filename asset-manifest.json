@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/beautiFY-E_Commerce_App/static/css/main.5e2d91d6.css",
+    "main.js": "/beautiFY-E_Commerce_App/static/js/main.a1aa429c.js",
+    "static/js/787.be6a3940.chunk.js": "/beautiFY-E_Commerce_App/static/js/787.be6a3940.chunk.js",
+    "index.html": "/beautiFY-E_Commerce_App/index.html",
+    "main.5e2d91d6.css.map": "/beautiFY-E_Commerce_App/static/css/main.5e2d91d6.css.map",
+    "main.a1aa429c.js.map": "/beautiFY-E_Commerce_App/static/js/main.a1aa429c.js.map",
+    "787.be6a3940.chunk.js.map": "/beautiFY-E_Commerce_App/static/js/787.be6a3940.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5e2d91d6.css",
+    "static/js/main.a1aa429c.js"
+  ]
+}
