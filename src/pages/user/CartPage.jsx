@@ -11,14 +11,26 @@ const CartPage = () => {
 
     const dispatch = useDispatch();
 
-    //Handle the product quantity
-    const [quantity, setQuantity] = useState(1);
-    const handleAddQuantity = () => {
-        setQuantity(quantity+1)
-    };
-    const handleMinusQuantity = () => {
-        setQuantity(quantity - 1)
-    }
+     // Create a local state to manage quantities
+     const [localQuantities, setLocalQuantities] = useState({});
+
+     const handleAddQuantity = (product) => {
+         // Copy the local quantities and increase the quantity for the given product
+         setLocalQuantities({
+             ...localQuantities,
+             [product.id]: (localQuantities[product.id] || 0) + 1,
+         });
+     };
+ 
+     const handleMinusQuantity = (product) => {
+         if (localQuantities[product.id] > 0) {
+             // Copy the local quantities and decrease the quantity for the given product
+             setLocalQuantities({
+                 ...localQuantities,
+                 [product.id]: (localQuantities[product.id] || 1) - 1,
+             });
+         }
+     };
 
     //Remove the product from cart
     const handleDeleteItem = (product) => {
@@ -64,20 +76,20 @@ const CartPage = () => {
                                         </div>
                                     </div>
                                     <div className="flex justify-center w-1/5">
-                                        <button className='cursor-pointer' onClick={handleMinusQuantity}>
+                                        <button className='cursor-pointer' onClick={()=>handleMinusQuantity(items)}>
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                                             </svg>
                                         </button>
-                                        <input className="mx-2 border text-center w-8" type="text" value={quantity} />
-                                        <button onClick={handleAddQuantity}>
+                                        <input className="mx-2 border text-center w-8" type="text" value={localQuantities[items.id] || 0} />
+                                        <button onClick={()=>handleAddQuantity(items)}>
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                                             </svg>
                                         </button>
                                     </div>
                                     <span className="text-center w-1/5 font-semibold text-sm">${items.price}</span>
-                                    <span className="text-center w-1/5 font-semibold text-sm">${(items.price) * (quantity)}.00</span>
+                                    <span className="text-center w-1/5 font-semibold text-sm">${items.price * localQuantities[items.id]}.00</span>
                                 </div>
                             )
                         })}
